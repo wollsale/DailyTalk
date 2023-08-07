@@ -1,0 +1,32 @@
+---
+pagination:
+  data: collections.posts
+  size: 30
+  alias: posts
+  reverse: true
+title: Daily Talk
+description: "an interesting way to start a day."
+layout: "base.njk"
+---
+{% import "./macros/insert-post.njk" as insertPost %}
+
+{% if posts | length %}
+    <ul class="posts">
+    {%- for post in posts -%}
+        {% if page.url === pagination.hrefs[0] %}
+            {% if loop.first %}
+                {{ insertPost.insertPost(post, true) }}
+            {% else %}
+                {{ insertPost.insertPost(post, false) }}
+            {% endif %}
+        {% else %}
+                {{ insertPost.insertPost(post, false) }}
+        {% endif %}
+        {# {% if not loop.first %}{% endif %} #}
+    {%- endfor -%}
+    </ul>
+    <div class="pagination">
+        {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}#main" class="link">Previous</a>{% else %}<p class="link link--disabled">Previous</p>{% endif %}
+        {% if pagination.href.next %}<a href="{{ pagination.href.next }}#main" class="link">Next</a>{% else %}<p class="link link--disabled">Next</p>{% endif %}
+    </div>
+{% endif %}

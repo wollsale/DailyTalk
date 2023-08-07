@@ -1,0 +1,38 @@
+{% import "../macros/insert-post.njk" as insertPost %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="../bundle.css">
+    <link rel="stylesheet" href="bundle.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✴</text></svg>">
+</head>
+<body>
+    <header class="header">
+        <div class="header__topbar">
+            <div class="header__main">
+                <h1 class="header__title"><a href="/">{{ title }}</a></h1>
+                <h2 class="header__description">{{ description }}</h2>
+            </div>
+            <a href="mailto:daily-talk-submission@alexiswollseifen.com" target="_blank" class="submit">Submit</a>
+        </div>
+
+        {# {% if page.url === pagination.hrefs[0]  %}
+            {%- for post in collections.posts -%}
+                {% if loop.last %}
+                    {{ insertPost.insertPost(post, true) }}
+                {% endif %}
+            {%- endfor -%}
+        {% endif %} #}
+
+    </header>
+
+    <main id="main">
+        {{ content | safe }}
+    </main>    
+</body>
+</html>

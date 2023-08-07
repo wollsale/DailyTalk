@@ -1,0 +1,26 @@
+{% macro insertPost(post, highlight) %}
+    <{% if highlight == true %}div{% else %}li{% endif %} class="post {% if highlight == true %}post--highlighted{% endif %}">
+        {# {% if post.data.published %}
+            <span class="post_date">{{ post.data.published }}</span>
+        {% endif %} #}
+        <h2 class="post_title">
+            {% if post.data.link %}
+                <a href="{{ post.data.link }}" target="_blank">{{ post.data.title }}</a>                
+            {% else %}
+                {{ post.data.title }}
+            {% endif %}
+        </h2>
+        {% if post.data.speaker or post.data.year %}
+            <div class="post_infos">
+                <span class="post_speaker">{{ post.data.speaker }}</span>
+                <span class="post_year">in {{ post.data.year }}</span>
+            </div>    
+        {% endif %}
+        {% if post.data.source or post.data.duration %}
+            <div class="post_video">
+                <div class="post_source {% if post.data.source == "Youtube" %}post_source--youtube{% elseif post.data.source == "Vimeo" %}post_source--vimeo{% else %}post_source--website{% endif %}" title="{{ post.data.source }}"></div> 
+                <span class="post_duration">{{ post.data.duration }}</span>
+            </div>    
+        {% endif %}
+    </{% if highlight == true %}div{% else %}li{% endif %}>
+{% endmacro %}
